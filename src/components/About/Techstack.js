@@ -51,9 +51,6 @@ function Techstack() {
       <Col xs={4} md={2} className="tech-icons">
         <SiTailwindcss />
       </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <FontAwesomeIcon icon="fas fa-hard-hat" />
-      </Col>
     </Row>
   );
 }
