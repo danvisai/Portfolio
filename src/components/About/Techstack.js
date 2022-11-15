@@ -17,6 +17,9 @@ import {
   SiSolidity,
   SiTailwindcss,
 } from "react-icons/si";
+import {
+  FaHardHat,
+} from "react-icons/fa";
 
 function Techstack() {
   return (
@@ -49,7 +52,7 @@ function Techstack() {
         <SiSolidity />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiTailwindcss />
+        <FaHardHat />
       </Col>
     </Row>
   );
