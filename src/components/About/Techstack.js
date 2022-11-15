@@ -13,7 +13,6 @@ import {
 } from "react-icons/di";
 import {
   SiPytorch,
-  SiFirebase,
   SiNextdotjs,
   SiSolidity,
   SiTailwindcss,
