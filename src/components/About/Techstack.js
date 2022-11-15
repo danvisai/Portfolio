@@ -52,7 +52,7 @@ function Techstack() {
         <SiSolidity />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiTailwindcss/>
+        <SiTailwindcss />
       </Col>
     </Row>
   );
