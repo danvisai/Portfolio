@@ -47,7 +47,7 @@ function Projects() {
               imgPath={ig}
               isBlog={false}
               title="ImageSteganography"
-              description="ImageSteganography prject made wiht python and flask. Takes an image as an input and uses it to hide a message using cryptography techniques by changing pixels of the image"
+              description="ImageSteganography project made with python and flask. Takes an image as an input and uses it to hide a message using cryptography techniques by changing pixels of the image"
               ghLink="https://github.com/danvisai/ImageSteganography"
               demoLink=""              
             />
@@ -58,7 +58,7 @@ function Projects() {
               imgPath={ds}
               isBlog={false}
               title="CrimeAnalysis"
-              description="A DataScience project made using python to analyze crime rate in a country. I have used visualization techniques and filtering techniques in the project"
+              description="A Data Science project made using python to analyze crime rate in a country. I have used visualization techniques and filtering techniques in the project"
               ghLink="https://github.com/danvisai/CrimeAnalysis"
               
             />
