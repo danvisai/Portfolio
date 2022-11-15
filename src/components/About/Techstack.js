@@ -9,13 +9,14 @@ import {
   DiPython,
   DiGit,
   DiJava,
-  SiTailwindcss,
+  
 } from "react-icons/di";
 import {
   SiPytorch,
   SiFirebase,
   SiNextdotjs,
   SiSolidity,
+  SiTailwindcss,
 } from "react-icons/si";
 
 function Techstack() {
