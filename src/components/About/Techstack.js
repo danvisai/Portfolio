@@ -46,9 +46,6 @@ function Techstack() {
         <DiPython />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiPytorch />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
         <SiSolidity />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
