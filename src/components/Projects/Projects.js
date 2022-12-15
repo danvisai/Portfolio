@@ -7,6 +7,7 @@ import ig from "../../Assets/Projects/ig.png";
 import marketplace from "../../Assets/Projects/marketplace.png";
 import pb from "../../Assets/Projects/pb.png";
 import aqp from "../../Assets/Projects/aqp.png";
+import apo from "../../Assets/Projects/apo.png";
 
 function Projects() {
   return (
@@ -71,6 +72,17 @@ function Projects() {
               title="PUBLICATION"
               description="Relevance of Computer Forensics in Security"
               ghLink="https://github.com/danvisai/Publications"
+              
+            />
+          </Col>
+          
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={apo}
+              isBlog={false}
+              title="Apocalypse Overkill"
+              description=""
+              ghLink="https://github.com/danvisai/ApocalypseOverkill"
               
             />
           </Col>
