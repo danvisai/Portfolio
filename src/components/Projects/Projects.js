@@ -81,7 +81,7 @@ function Projects() {
               imgPath={apo}
               isBlog={false}
               title="Apocalypse Overkill"
-              description=""
+              description="To play https://vercel.com/danvisai/apocalypse-overkill/E3ox57n3fP4frvzGK2tCMFbXjX2M"
               ghLink="https://github.com/danvisai/ApocalypseOverkill"
               
             />
