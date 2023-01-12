@@ -81,9 +81,9 @@ function Projects() {
               imgPath={apo}
               isBlog={false}
               title="Apocalypse Overkill"
-              description="To play https://apocalypse-overkill.vercel.app/"
+              description="Click on the demo to try it out"
               ghLink="https://github.com/danvisai/ApocalypseOverkill"
-              
+              demoLink="https://apocalypse-overkill.vercel.app/" 
             />
           </Col>
 
