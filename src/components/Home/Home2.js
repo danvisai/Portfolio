@@ -29,10 +29,10 @@ function Home2() {
               <br />
               My field of Interest's are building new &nbsp;
               <i>
-                <b className="purple">Web Technologies and Products </b> and
+                <b className="purple">Games and Graphic products </b> and
                 also in areas related to{" "}
                 <b className="purple">
-                   Game Development, Cyber Security and BlockChain.
+                   Graphic Programming, Game Development, Cyber Security and BlockChain.
                 </b>
               </i>
               <br />
@@ -42,7 +42,7 @@ function Home2() {
               <i>
                 <b className="purple">
                   {" "}
-                  Modern Javascript Library and Frameworks
+                  Unity, Unreal, Modern Javascript Library and Frameworks
                 </b>
               </i>
               &nbsp; like
