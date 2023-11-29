@@ -9,6 +9,7 @@ import pb from "../../Assets/Projects/pb.png";
 import aqp from "../../Assets/Projects/aqp.png";
 import apo from "../../Assets/Projects/apo.png";
 import spa from "../../Assets/Projects/spa.png";
+import gce from "../../Assets/Projects/gce.png";
 
 function Projects() {
   return (
@@ -27,6 +28,7 @@ function Projects() {
               imgPath={spa}
               isBlog={false}
               title="Spatial Arrangement Gmae"
+             ghLink="https://github.com/danvisai/AgriCrop"
               description="A specialized VR game utilizing Unity3D, integrating sensory-friendly design elements, spatial organization challenges, and interactive tasks to promote cognitive engagement and enhance spatial cognition for individuals with autism."
               //demoLink=""
             />
@@ -36,16 +38,18 @@ function Projects() {
               //imgPath={}
               isBlog={false}
               title="Game Engine"
+              ghLink=""
               description="Developed an engine using C++, OpenGL using entity component system"
               //demoLink=""
             />
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={spa}
+              imgPath={gce}
               isBlog={false}
-              title="Spatial Arrangement Gmae"
-              description="A specialized VR game utilizing Unity3D, integrating sensory-friendly design elements, spatial organization challenges, and interactive tasks to promote cognitive engagement and enhance spatial cognition for individuals with autism."
+              title="Generative AI canvas Editor"
+              ghLink="https://github.com/danvisai/Final_project_Backend/"
+              description=""
               //demoLink=""
             />
           </Col>
