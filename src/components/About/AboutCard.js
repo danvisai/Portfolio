@@ -10,7 +10,7 @@ function AboutCard() {
           <p style={{ textAlign: "justify" }}>
             Hi Everyone, I am <span className="purple">Danvi Sai </span>
             from <span className="purple"> Telangana, India.</span>
-            <br />I am a student at KL University pursuing bachelors in computer science engineering.
+            <br />I am a student at Purdue University pursuing masters in computer graphics technology.
             <br />
             <br />
             Apart from coding, some other activities that I love to do!
