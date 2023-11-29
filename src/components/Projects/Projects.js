@@ -8,6 +8,7 @@ import marketplace from "../../Assets/Projects/marketplace.png";
 import pb from "../../Assets/Projects/pb.png";
 import aqp from "../../Assets/Projects/aqp.png";
 import apo from "../../Assets/Projects/apo.png";
+import spa from "../../Assets/Projects/spa.png";
 
 function Projects() {
   return (
@@ -21,6 +22,34 @@ function Projects() {
           Here are a few projects I've worked on recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+        <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={spa}
+              isBlog={false}
+              title="Spatial Arrangement Gmae"
+              description="A specialized VR game utilizing Unity3D, integrating sensory-friendly design elements, spatial organization challenges, and interactive tasks to promote cognitive engagement and enhance spatial cognition for individuals with autism."
+              //demoLink=""
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={}
+              isBlog={false}
+              title="Game Engine"
+              description="Developed an engine using C++, OpenGL using entity component system"
+              //demoLink=""
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={spa}
+              isBlog={false}
+              title="Spatial Arrangement Gmae"
+              description="A specialized VR game utilizing Unity3D, integrating sensory-friendly design elements, spatial organization challenges, and interactive tasks to promote cognitive engagement and enhance spatial cognition for individuals with autism."
+              //demoLink=""
+            />
+          </Col>
+                
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={marketplace}
