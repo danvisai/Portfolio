@@ -10,7 +10,7 @@ import aqp from "../../Assets/Projects/aqp.png";
 import apo from "../../Assets/Projects/apo.png";
 import spa from "../../Assets/Projects/spa.png";
 import gce from "../../Assets/Projects/gce.png";
-import gce from "../../Assets/Projects/ge.jpg";
+import ge from "../../Assets/Projects/ge.jpg";
 
 function Projects() {
   return (
