@@ -33,7 +33,7 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={}
+              //imgPath={}
               isBlog={false}
               title="Game Engine"
               description="Developed an engine using C++, OpenGL using entity component system"
