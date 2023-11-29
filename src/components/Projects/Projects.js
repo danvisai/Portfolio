@@ -10,6 +10,7 @@ import aqp from "../../Assets/Projects/aqp.png";
 import apo from "../../Assets/Projects/apo.png";
 import spa from "../../Assets/Projects/spa.png";
 import gce from "../../Assets/Projects/gce.png";
+import gce from "../../Assets/Projects/ge.jpg";
 
 function Projects() {
   return (
@@ -35,7 +36,7 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              //imgPath={}
+              imgPath={ge}
               isBlog={false}
               title="Game Engine"
               ghLink=""
