@@ -29,7 +29,6 @@ function Projects() {
               imgPath={spa}
               isBlog={false}
               title="Spatial Arrangement Game"
-             
              demoLink="https://www.youtube.com/watch?v=dRMw0R8pNFA"
               description="A specialized VR game utilizing Unity3D, integrating sensory-friendly design elements, spatial organization challenges, and interactive tasks to promote cognitive engagement and enhance spatial cognition for individuals with autism."
              //ghLink=""
