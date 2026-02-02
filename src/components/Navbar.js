@@ -15,6 +15,7 @@ import {
 } from "react-icons/ai";
 
 import { CgFileDocument } from "react-icons/cg";
+import { IoGameControllerOutline } from "react-icons/io5";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -79,6 +80,16 @@ function NavBar() {
                   style={{ marginBottom: "2px" }}
                 />{" "}
                 Projects
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/game"
+                onClick={() => updateExpanded(false)}
+              >
+                <IoGameControllerOutline style={{ marginBottom: "2px" }} /> Game
               </Nav.Link>
             </Nav.Item>
 
