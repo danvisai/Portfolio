@@ -55,7 +55,10 @@ function ProjectCards(props) {
             href={props.demoLink}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ marginLeft: "10px" }}
+            style={{
+              marginLeft: props.ghLink || props.slug ? "10px" : "0",
+              marginTop: props.ghLink || props.slug ? "0" : "10px",
+            }}
           >
             <CgWebsite /> &nbsp;
             {"Demo"}
