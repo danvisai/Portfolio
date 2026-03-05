@@ -1,124 +1,68 @@
-import React, { useState } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
-import logo from "../Assets/logo.png";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import { CgGitFork } from "react-icons/cg";
-import { ImBlog } from "react-icons/im";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { CgGitFork, CgFileDocument } from "react-icons/cg";
 import {
   AiFillStar,
   AiOutlineHome,
   AiOutlineFundProjectionScreen,
   AiOutlineUser,
 } from "react-icons/ai";
-
-import { CgFileDocument } from "react-icons/cg";
 import { IoGameControllerOutline } from "react-icons/io5";
+import { FaMoon, FaSun } from "react-icons/fa";
 
-function NavBar() {
-  const [expand, updateExpanded] = useState(false);
-  const [navColour, updateNavbar] = useState(false);
+const NAV_ITEMS = [
+  { to: "/", icon: AiOutlineHome, label: "Home" },
+  { to: "/about", icon: AiOutlineUser, label: "About" },
+  { to: "/project", icon: AiOutlineFundProjectionScreen, label: "Projects" },
+  { to: "/game", icon: IoGameControllerOutline, label: "Game" },
+  { to: "/resume", icon: CgFileDocument, label: "Resume" },
+];
 
-  function scrollHandler() {
-    if (window.scrollY >= 20) {
-      updateNavbar(true);
-    } else {
-      updateNavbar(false);
-    }
-  }
+function NavBar({ theme = "light", onToggleTheme }) {
+  const location = useLocation();
 
-  window.addEventListener("scroll", scrollHandler);
+  const isActive = (path) => {
+    if (path === "/") return location.pathname === "/";
+    return location.pathname.startsWith(path);
+  };
 
   return (
-    <Navbar
-      expanded={expand}
-      fixed="top"
-      expand="md"
-      className={navColour ? "sticky" : "navbar"}
-    >
-      <Container>
-        <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} className="img-fluid logo" alt="brand" />
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="responsive-navbar-nav"
-          onClick={() => {
-            updateExpanded(expand ? false : "expanded");
-          }}
+    <nav className="dock-bar">
+      {NAV_ITEMS.map(({ to, icon: Icon, label }) => (
+        <Link
+          key={to}
+          to={to}
+          className={`dock-item${isActive(to) ? " active" : ""}`}
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto" defaultActiveKey="#home">
-            <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
-              </Nav.Link>
-            </Nav.Item>
+          <Icon className="dock-icon" />
+          <span className="dock-label">{label}</span>
+        </Link>
+      ))}
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/about"
-                onClick={() => updateExpanded(false)}
-              >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About
-              </Nav.Link>
-            </Nav.Item>
+      <div className="dock-separator" />
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/project"
-                onClick={() => updateExpanded(false)}
-              >
-                <AiOutlineFundProjectionScreen
-                  style={{ marginBottom: "2px" }}
-                />{" "}
-                Projects
-              </Nav.Link>
-            </Nav.Item>
+      <a
+        className="dock-item"
+        href="https://github.com/danvisai/Portfolio"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <CgGitFork className="dock-icon" />
+        <AiFillStar className="dock-icon dock-icon-star" />
+        <span className="dock-label">GitHub</span>
+      </a>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/game"
-                onClick={() => updateExpanded(false)}
-              >
-                <IoGameControllerOutline style={{ marginBottom: "2px" }} /> Game
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/resume"
-                onClick={() => updateExpanded(false)}
-              >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
-              </Nav.Link>
-            </Nav.Item>
-
-
-
-            <Nav.Item className="fork-btn">
-              <Button
-                href="https://github.com/danvisai/Portfolio"
-                target="_blank"
-                className="fork-btn-inner"
-              >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
-              </Button>
-            </Nav.Item>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      <button
+        type="button"
+        className={`dock-theme-toggle${theme === "dark" ? " is-dark" : ""}`}
+        onClick={onToggleTheme}
+        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      >
+        <span className="dock-theme-knob" />
+        <FaSun className="dock-theme-icon dock-theme-icon-sun" />
+        <FaMoon className="dock-theme-icon dock-theme-icon-moon" />
+      </button>
+    </nav>
   );
 }
 

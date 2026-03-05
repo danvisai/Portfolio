@@ -3,23 +3,17 @@ import { Col, Row } from "react-bootstrap";
 import { CgCPlusPlus } from "react-icons/cg";
 import {
   DiJavascript1,
-  DiReact,
-  DiNodejs,
-  DiMongodb,
   DiPython,
   DiGit,
-  DiJava,
-  
 } from "react-icons/di";
 import {
-  SiPytorch,
-  SiNextdotjs,
-  SiSolidity,
-  SiTailwindcss,
+  SiCsharp,
+  SiOpengl,
+  SiVulkan,
+  SiUnity,
+  SiUnrealengine,
+  SiNvidia,
 } from "react-icons/si";
-import {
-  FaHardHat,
-} from "react-icons/fa";
 
 function Techstack() {
   return (
@@ -28,34 +22,31 @@ function Techstack() {
         <CgCPlusPlus />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiNodejs />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiReact />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiMongodb />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiNextdotjs />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiGit />
+        <SiCsharp />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <DiPython />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiSolidity />
+        <DiJavascript1 />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <FaHardHat />
+        <SiOpengl />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiTailwindcss />
+        <SiVulkan />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiUnity />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiUnrealengine />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiNvidia />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <DiGit />
       </Col>
     </Row>
   );
