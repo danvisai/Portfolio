@@ -58,7 +58,7 @@ const STOPS = [
     w: 360,
     title: "Contact Me",
     subtitle: "Let’s Connect",
-    body: "LinkedIn: linkedin.com/in/s-danvi-4856b8208",
+    body: "Email: danvisimhadri@gmail.com\nLinkedIn: linkedin.com/in/s-danvi-4856b8208",
     tags: ["Email", "LinkedIn"],
     isContactPanel: true,
   },
