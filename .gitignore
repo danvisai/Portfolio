@@ -34,3 +34,11 @@ Server/config.js
 
 # Local Netlify folder
 .netlify
+
+# local tooling/state
+.claude/
+ProjectVersion.txt
+
+# local archives/installers
+*.zip
+*.pkg

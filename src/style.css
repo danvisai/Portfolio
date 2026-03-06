@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 html {
   --section-background-color: linear-gradient(
     to bottom left,
@@ -25,21 +27,175 @@ button:focus {
 /* --------- */
 /*  Preloader */
 /* --------- */
-#preloader {
+#preloader,
+#preloader-none {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 999999;
-  background-color: #0c1117;
-  background-image: url(./Assets/pre.svg);
-  background-repeat: no-repeat;
-  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, #5ba3d9 0%, #67aee8 30%, #7dc0f6 60%, #a8d8f8 100%);
+  transition: opacity 0.4s ease;
+}
+
+#preloader {
+  opacity: 1;
 }
 
 #preloader-none {
   opacity: 0;
+  pointer-events: none;
+}
+
+/* Mario preloader layout */
+.mario-pre-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding-bottom: 24px;
+}
+
+.mario-pre-icons {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.mario-pre-block {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  animation: mario-block-bounce 0.55s ease-in-out infinite alternate;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+}
+
+.mario-pre-mushroom {
+  width: 72px;
+  height: 72px;
+  image-rendering: pixelated;
+  animation: mario-mushroom-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.1s both,
+             mario-mushroom-float 1.2s ease-in-out 0.6s infinite alternate;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.mario-pre-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: 4px;
+  text-shadow: 3px 3px 0 #1a5c99, 0 0 20px rgba(255,255,255,0.4);
+  margin: 0;
+  animation: mario-text-pulse 1.5s ease-in-out infinite;
+}
+
+.mario-pre-dots {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mario-pre-dots span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f7d002;
+  border: 2px solid #c8a000;
+  box-shadow: 0 2px 0 #a07800, inset 0 -1px 0 rgba(0,0,0,0.2);
+  animation: mario-dot-bounce 0.9s ease-in-out infinite;
+}
+
+.mario-pre-dots span:nth-child(2) { animation-delay: 0.15s; }
+.mario-pre-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+.mario-pre-bar-wrap {
+  width: 220px;
+  height: 14px;
+  background: #1a5c99;
+  border: 3px solid #fff;
+  border-radius: 0;
+  box-shadow: 0 0 0 2px #1a5c99, inset 0 2px 0 rgba(0,0,0,0.3);
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+.mario-pre-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f7d002 0%, #ffd700 50%, #f7a002 100%);
+  width: 0%;
+  animation: mario-bar-fill 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.4);
+}
+
+/* Ground + Mario strip */
+.mario-pre-ground-wrap {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.mario-pre-mario {
+  position: absolute;
+  bottom: 56px;
+  height: 56px;
+  image-rendering: pixelated;
+  animation: mario-run 2.2s linear infinite;
+  filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3));
+}
+
+.mario-pre-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-repeat: repeat-x;
+  background-size: 56px 56px;
+  image-rendering: pixelated;
+}
+
+/* Keyframes */
+@keyframes mario-block-bounce {
+  0%   { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-14px) scale(1.05); }
+}
+
+@keyframes mario-mushroom-pop {
+  0%   { transform: scale(0) translateY(30px); opacity: 0; }
+  100% { transform: scale(1) translateY(0);    opacity: 1; }
+}
+
+@keyframes mario-mushroom-float {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+@keyframes mario-dot-bounce {
+  0%, 80%, 100% { transform: translateY(0);    opacity: 0.5; }
+  40%            { transform: translateY(-12px); opacity: 1;   }
+}
+
+@keyframes mario-bar-fill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes mario-run {
+  0%   { left: -80px; }
+  100% { left: calc(100% + 20px); }
+}
+
+@keyframes mario-text-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
 }
 
 #no-scroll {
