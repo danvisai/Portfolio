@@ -175,7 +175,7 @@ function MarioPortfolio() {
     email: "",
     message: "",
   });
-  const [tuning, setTuning] = useState({
+  const [tuning] = useState({
     jumpHeight: 120,
     proximityStart: 36,
     proximityEnd: 60,

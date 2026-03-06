@@ -12,7 +12,6 @@ import {
   Route,
   Routes,
   Navigate,
-  useLocation
 } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
@@ -20,7 +19,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function AppLayout({ load }) {
-  const location = useLocation();
   const [theme, setTheme] = useState(() => {
     const stored = window.localStorage.getItem("portfolio-theme");
     return stored === "dark" ? "dark" : "light";
