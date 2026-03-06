@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import ProjectDetail from "./components/Projects/ProjectDetail";
-import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
 import Game from "./components/Game";
 import MarioPortfolio from "./components/MarioPortfolio";
@@ -22,7 +21,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function AppLayout({ load }) {
   const location = useLocation();
-  const hideFooter = location.pathname === "/";
   const [theme, setTheme] = useState(() => {
     const stored = window.localStorage.getItem("portfolio-theme");
     return stored === "dark" ? "dark" : "light";
@@ -52,7 +50,6 @@ function AppLayout({ load }) {
           <Route path="/game" element={<Game />} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
-        {!hideFooter && <Footer />}
       </div>
     </>
   );

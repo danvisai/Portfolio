@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import marioRunningSheet from "../Assets/mario_running.png";
+import iconMushroom from "../Assets/icon_mushroom.svg";
+import iconBlock from "../Assets/icon_block.svg";
 import terrainBlock from "../Assets/terrain_block.png";
 import pipeTexture from "../Assets/pipe.png";
 import cloudLarge from "../Assets/cloud_large.avif";
@@ -7,12 +9,16 @@ import cloudMedium from "../Assets/cloud_medium.png";
 import cloudSmiling from "../Assets/cloud_smiling.png";
 import hillFar from "../Assets/hill_far.png";
 import hillNear from "../Assets/hill_near.png";
+import titleImg from "../Assets/title.png";
 import brickFillers from "../Assets/brick_fillers.png";
 import blockFiller from "../Assets/block_filler.png";
 import questionBlock from "../Assets/question_block.png";
 import "./MarioPortfolio.css";
 
-const WORLD_LENGTH = 5200;
+const CASTLE_X = 4720;
+const CASTLE_WIDTH = 240;
+const CASTLE_IMG_SRC = `${process.env.PUBLIC_URL}/Mario/Castle.png`;
+const WORLD_LENGTH = CASTLE_X + CASTLE_WIDTH;
 const HERO_X = 220;
 const FILLER_RULES = {
   xStart: 420,
@@ -26,6 +32,7 @@ const FILLER_RULES = {
   avoidPipesRadius: 110,
   avoidStopRadius: 200,
   avoidQuestionRadius: 90,
+  avoidCastleRadius: 240,
 };
 
 const QUESTION_BLOCKS = [
@@ -38,31 +45,111 @@ const STOPS = [
     key: "about-me",
     x: 560,
     w: 420,
+    icon: "mushroom",
     title: "About Me",
     subtitle: "Graphics Programmer | Game Developer",
-    body: "I build interactive worlds where technology and creativity meet. As a graphics programmer and XR developer, I focus on real-time rendering, gameplay systems, and immersive environment design. I enjoy developing shaders, rendering pipelines, and gameplay mechanics that allow players to explore and interact with rich virtual spaces.\n\nFrom VR experiences to custom rendering systems, my work blends graphics programming, game development, and level design to create engaging digital environments that feel both visually compelling and technically robust.",
+    body: "I build interactive worlds where technology meets creativity — as a graphics programmer and XR developer focused on real-time rendering, gameplay systems, and immersive environments.\n\nMy work spans custom shaders, rendering pipelines, VR experiences, and level design — creating spaces that feel both technically robust and visually compelling.",
     tags: ["C++", "Realtime Rendering", "Engine Systems"],
   },
   {
     key: "skills-overview",
     x: 1360,
     w: 360,
+    icon: "block",
     title: "Core Focus Areas",
     subtitle: "",
-    body: "Graphics Programming\n\nGame Development\n\nVR / XR Development\n\nGame Engines & Tools\n\nProgramming Languages\n\nDesign & Collaboration",
+    body: "Graphics Programming\nGame Development\nVR / XR Development\nGame Engines & Tools\nProgramming Languages\nDesign & Collaboration",
+    isBulletList: true,
     tags: ["All Skill Sets"],
+  },
+  {
+    key: "explore-tabs",
+    x: 3100,
+    w: 360,
+    icon: "flag",
+    title: "Keep Exploring",
+    subtitle: "Continue the Journey",
+    body: "About — My story & background\nProjects — Full project showcase\nGame — Play an interactive demo\nResume — View & download my CV",
+    isBulletList: true,
+    tags: ["Use the Navbar ↓"],
   },
   {
     key: "contact-panel",
     x: 2200,
     w: 360,
+    icon: "envelope",
     title: "Contact Me",
-    subtitle: "Let’s Connect",
+    subtitle: "Let's Connect",
     body: "Email: danvisimhadri@gmail.com\nLinkedIn: linkedin.com/in/s-danvi-4856b8208",
     tags: ["Email", "LinkedIn"],
     isContactPanel: true,
   },
 ];
+
+function EnvelopeIcon() {
+  return (
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" className="mario-pixel-icon" aria-hidden="true">
+      <rect x="0" y="2" width="16" height="1" fill="#2b5f91"/>
+      <rect x="0" y="13" width="16" height="1" fill="#2b5f91"/>
+      <rect x="0" y="2" width="1" height="12" fill="#2b5f91"/>
+      <rect x="15" y="2" width="1" height="12" fill="#2b5f91"/>
+      <rect x="1" y="3" width="14" height="1" fill="#4a90c8"/>
+      <rect x="1" y="12" width="14" height="1" fill="#4a90c8"/>
+      <rect x="1" y="3" width="1" height="9" fill="#4a90c8"/>
+      <rect x="14" y="3" width="1" height="9" fill="#4a90c8"/>
+      <rect x="2" y="4" width="12" height="7" fill="#e8f4ff"/>
+      <rect x="2" y="4" width="6" height="1" fill="#2b5f91"/>
+      <rect x="8" y="4" width="6" height="1" fill="#2b5f91"/>
+      <rect x="3" y="5" width="5" height="1" fill="#2b5f91"/>
+      <rect x="8" y="5" width="5" height="1" fill="#2b5f91"/>
+      <rect x="4" y="6" width="4" height="1" fill="#2b5f91"/>
+      <rect x="8" y="6" width="4" height="1" fill="#2b5f91"/>
+      <rect x="5" y="7" width="3" height="1" fill="#2b5f91"/>
+      <rect x="8" y="7" width="3" height="1" fill="#2b5f91"/>
+      <rect x="7" y="8" width="2" height="1" fill="#2b5f91"/>
+    </svg>
+  );
+}
+
+function CoinBullet() {
+  return (
+    <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" className="mario-coin-bullet" aria-hidden="true">
+      <rect x="2" y="0" width="4" height="1" fill="#f5c842"/>
+      <rect x="1" y="1" width="6" height="1" fill="#f5c842"/>
+      <rect x="0" y="2" width="8" height="4" fill="#f5c842"/>
+      <rect x="1" y="6" width="6" height="1" fill="#f5c842"/>
+      <rect x="2" y="7" width="4" height="1" fill="#f5c842"/>
+      <rect x="2" y="2" width="2" height="1" fill="#fff8a0"/>
+      <rect x="2" y="3" width="1" height="1" fill="#fff8a0"/>
+    </svg>
+  );
+}
+
+function FlagIcon() {
+  return (
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" className="mario-pixel-icon" aria-hidden="true">
+      {/* Pole */}
+      <rect x="3" y="0" width="2" height="15" fill="#c8a850"/>
+      {/* Flag body */}
+      <rect x="5" y="1" width="8" height="6" fill="#e03030"/>
+      <rect x="5" y="2" width="7" height="4" fill="#f04040"/>
+      {/* Star on flag */}
+      <rect x="8" y="2" width="2" height="1" fill="#fff"/>
+      <rect x="7" y="3" width="4" height="1" fill="#fff"/>
+      <rect x="8" y="4" width="2" height="1" fill="#fff"/>
+      {/* Base */}
+      <rect x="1" y="14" width="6" height="2" fill="#c8a850"/>
+    </svg>
+  );
+}
+
+function StopIcon({ type }) {
+  if (type === "mushroom") return <img src={iconMushroom} alt="" className="mario-pixel-icon" style={{ imageRendering: "auto" }} />;
+  if (type === "block") return <img src={iconBlock} alt="" className="mario-pixel-icon" style={{ imageRendering: "auto" }} />;
+  if (type === "flag") return <FlagIcon />;
+  if (type === "envelope") return <EnvelopeIcon />;
+  return null;
+}
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -76,10 +163,12 @@ function MarioPortfolio() {
   const wrapperRef = useRef(null);
   const marioCanvasRef = useRef(null);
   const [progress, setProgress] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(1200);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isPreparingJump, setIsPreparingJump] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
+  // jumpKey alternates between 0 and 1 to force CSS animation restart on each jump
+  const [jumpKey, setJumpKey] = useState(0);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",
@@ -107,6 +196,10 @@ function MarioPortfolio() {
   const preJumpTimerRef = useRef(0);
   const jumpTimerRef = useRef(0);
   const triggeredPipesRef = useRef(new Set());
+  const trackElRef = useRef(null);
+  const smoothShiftXRef = useRef(0);
+  const targetShiftXRef = useRef(0);
+  const prevShiftXRef = useRef(0);
 
   useEffect(() => {
     isScrollingRef.current = isScrolling;
@@ -140,7 +233,7 @@ function MarioPortfolio() {
       window.clearTimeout(scrollStopTimerRef.current);
       scrollStopTimerRef.current = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 140);
+      }, 280);
     };
 
     updateProgress();
@@ -154,12 +247,23 @@ function MarioPortfolio() {
     };
   }, []);
 
-  const maxShift = Math.max(0, WORLD_LENGTH - viewportWidth + 200);
+  const maxShift = Math.max(0, WORLD_LENGTH - viewportWidth);
   const shiftX = progress * maxShift;
+  // Keep the RAF lerp target in sync with the latest computed shiftX
+  targetShiftXRef.current = shiftX;
   const characterPulse = 1 + Math.sin(progress * 64) * 0.012;
   const skyShiftFar = -shiftX * 0.04;
   const skyShiftMid = -shiftX * 0.08;
   const skyShiftNear = -shiftX * 0.12;
+
+  // Build animation string — alternates between ArcA / ArcB so browser always
+  // sees a *new* animation name and restarts it without needing a DOM remount.
+  const jumpAnimName = jumpKey % 2 === 0 ? "marioJumpArcA" : "marioJumpArcB";
+  const characterAnimation = isJumping
+    ? `${jumpAnimName} 0.52s cubic-bezier(0.22, 0.82, 0.34, 1) 1 forwards`
+    : isScrolling
+    ? "marioRunBob 0.62s ease-in-out infinite"
+    : undefined;
 
   const cloudItems = useMemo(() => {
     const spritePool = [
@@ -207,10 +311,6 @@ function MarioPortfolio() {
     []
   );
 
-  const updateTuning = (key, value) => {
-    setTuning((prev) => ({ ...prev, [key]: Number(value) }));
-  };
-
   const updateContactForm = (key, value) => {
     setContactForm((prev) => ({ ...prev, [key]: value }));
   };
@@ -242,8 +342,10 @@ function MarioPortfolio() {
         ...pipes.map((pipe) => pipe.x),
         ...STOPS.map((stop) => stop.x),
         ...QUESTION_BLOCKS.map((qb) => qb.x),
+        CASTLE_X,
       ];
       const getZoneRadius = (zoneX) => {
+        if (zoneX === CASTLE_X) return FILLER_RULES.avoidCastleRadius;
         if (STOPS.some((stop) => stop.x === zoneX)) return FILLER_RULES.avoidStopRadius;
         if (QUESTION_BLOCKS.some((qb) => qb.x === zoneX)) return FILLER_RULES.avoidQuestionRadius;
         return FILLER_RULES.avoidPipesRadius;
@@ -265,7 +367,6 @@ function MarioPortfolio() {
 
         if (place && !tooCloseToZone) {
           let type = seed2 < FILLER_RULES.blockChance ? "block" : "brick";
-          // Avoid long runs of the same prop type.
           if (type === previousType && seeded01(seed2 * 97) > 0.56) {
             type = type === "block" ? "brick" : "block";
           }
@@ -315,6 +416,32 @@ function MarioPortfolio() {
 
   const questionBlocks = QUESTION_BLOCKS;
 
+  // Reset card body scroll positions to top on mount (prevents browser scroll-restore)
+  useEffect(() => {
+    document.querySelectorAll(".mario-stop-body").forEach((el) => {
+      el.scrollTop = 0;
+    });
+  }, []);
+
+  // RAF lerp loop — smooths world-track movement consistently for both mouse
+  // wheel (large discrete steps) and trackpad (small continuous steps).
+  useEffect(() => {
+    let rafId;
+    const LERP = 0.18;
+    const tick = () => {
+      const target = targetShiftXRef.current;
+      const cur = smoothShiftXRef.current;
+      const next = Math.abs(target - cur) < 0.3 ? target : cur + (target - cur) * LERP;
+      smoothShiftXRef.current = next;
+      if (trackElRef.current) {
+        trackElRef.current.style.transform = `translateX(-${next}px)`;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
   useEffect(() => {
     const heroWorldX = shiftX + HERO_X;
     const farDistance = Math.max(tuning.proximityStart, tuning.proximityEnd);
@@ -326,16 +453,27 @@ function MarioPortfolio() {
       }
     });
 
-    if (!isScrolling || isPreparingJumpRef.current || isJumpingRef.current) return;
+    if (!isScrolling || isPreparingJumpRef.current || isJumpingRef.current) {
+      prevShiftXRef.current = shiftX;
+      return;
+    }
 
     const heroFrontX = heroWorldX + tuning.frontOffset;
+    const prevHeroFrontX = prevShiftXRef.current + HERO_X + tuning.frontOffset;
 
-    const nearbyPipe = pipes.find(
-      (pipe) =>
-        heroFrontX > pipe.x - farDistance &&
-        heroFrontX < pipe.x - nearDistance &&
-        !triggeredPipesRef.current.has(pipe.x)
-    );
+    // Find a pipe the hero is currently near OR traversed through in one step
+    const nearbyPipe = pipes.find((pipe) => {
+      if (triggeredPipesRef.current.has(pipe.x)) return false;
+      const zoneStart = pipe.x - farDistance;
+      const zoneEnd = pipe.x - nearDistance;
+      // Currently inside zone
+      if (heroFrontX > zoneStart && heroFrontX < zoneEnd) return true;
+      // Jumped over the zone in one large scroll step (mouse wheel)
+      if (prevHeroFrontX <= zoneStart && heroFrontX >= zoneEnd) return true;
+      return false;
+    });
+
+    prevShiftXRef.current = shiftX;
 
     if (!nearbyPipe) return;
 
@@ -346,6 +484,7 @@ function MarioPortfolio() {
     preJumpTimerRef.current = window.setTimeout(() => {
       setIsPreparingJump(false);
       setIsJumping(true);
+      setJumpKey((k) => 1 - k); // alternate 0↔1 to restart animation
       jumpTimerRef.current = window.setTimeout(() => {
         setIsJumping(false);
       }, tuning.jumpDuration);
@@ -654,6 +793,13 @@ function MarioPortfolio() {
             />
           ))}
           <div className="mario-sky-vignette" />
+
+          <img
+            src={titleImg}
+            alt="Danvi's Portfolio"
+            className="mario-title-img"
+          />
+
           {cloudItems.map((cloud) => (
             <img
               key={cloud.id}
@@ -666,7 +812,7 @@ function MarioPortfolio() {
         </div>
 
         <div className="mario-world-window">
-          <div className="mario-world-track" style={{ transform: `translateX(-${shiftX}px)` }}>
+          <div className="mario-world-track" ref={trackElRef} style={{ width: `${WORLD_LENGTH}px` }}>
             <div className="mario-ground" />
 
             {pipes.map((pipe) => (
@@ -695,6 +841,21 @@ function MarioPortfolio() {
               />
             ))}
 
+            <img
+              src={CASTLE_IMG_SRC}
+              alt=""
+              className="mario-castle"
+              style={{ left: `${CASTLE_X}px`, width: `${CASTLE_WIDTH}px` }}
+              aria-hidden="true"
+            />
+            <img
+              src={cleanedClouds.smiling}
+              alt=""
+              className="mario-castle-cloud"
+              style={{ left: `${CASTLE_X + 62}px` }}
+              aria-hidden="true"
+            />
+
             {STOPS.map((stop) => {
               const distanceToHero = Math.abs(stop.x - (shiftX + HERO_X));
               const isActive = distanceToHero < 280;
@@ -704,13 +865,23 @@ function MarioPortfolio() {
                   className={`mario-stop-card ${isActive ? "is-active" : ""}`}
                   style={{ left: `${stop.x}px`, width: `${stop.w}px` }}
                 >
-                  <div className="mario-stop-icon-slot">ICON</div>
+                  <div className="mario-stop-icon-slot">
+                    <StopIcon type={stop.icon} />
+                  </div>
                   <p className="mario-stop-label">{stop.subtitle}</p>
                   <h3>{stop.title}</h3>
                   <div className="mario-stop-body">
-                    {stop.body.split("\n\n").map((para, i) => (
-                      <p key={i}>{para}</p>
-                    ))}
+                    {stop.isBulletList
+                      ? stop.body.split("\n").filter(Boolean).map((item, i) => (
+                          <div key={i} className="mario-bullet-item">
+                            <CoinBullet />
+                            <span>{item}</span>
+                          </div>
+                        ))
+                      : stop.body.split("\n\n").map((para, i) => (
+                          <p key={i}>{para}</p>
+                        ))
+                    }
                     {stop.isContactPanel && (
                       <a
                         className="mario-stop-link"
@@ -743,67 +914,22 @@ function MarioPortfolio() {
 
           <div className="mario-character-shell">
             <div
-              className={`mario-character ${
-                isPreparingJump ? "is-pre-jump" : isJumping ? "is-jumping" : isScrolling ? "is-moving" : ""
-              }`}
+              className={`mario-character ${isPreparingJump ? "is-pre-jump" : ""}`}
               style={{
                 "--mario-scale": characterPulse,
                 "--mario-jump-height": `${tuning.jumpHeight}px`,
+                animation: characterAnimation,
               }}
               aria-hidden="true"
             >
               <canvas ref={marioCanvasRef} className="mario-sprite-canvas" />
             </div>
           </div>
-        </div>
 
-        <aside className="mario-tuning-panel" aria-label="Mario tuning controls">
-          <h4>Jump Tuning</h4>
-          <label>
-            Jump Height: {tuning.jumpHeight}px
-            <input
-              type="range"
-              min="60"
-              max="160"
-              step="1"
-              value={tuning.jumpHeight}
-              onChange={(e) => updateTuning("jumpHeight", e.target.value)}
-            />
-          </label>
-          <label>
-            Proximity Start: {tuning.proximityStart}px
-            <input
-              type="range"
-              min="10"
-              max="120"
-              step="1"
-              value={tuning.proximityStart}
-              onChange={(e) => updateTuning("proximityStart", e.target.value)}
-            />
-          </label>
-          <label>
-            Proximity End: {tuning.proximityEnd}px
-            <input
-              type="range"
-              min="20"
-              max="140"
-              step="1"
-              value={tuning.proximityEnd}
-              onChange={(e) => updateTuning("proximityEnd", e.target.value)}
-            />
-          </label>
-          <label>
-            Mario Front Offset: {tuning.frontOffset}px
-            <input
-              type="range"
-              min="24"
-              max="90"
-              step="1"
-              value={tuning.frontOffset}
-              onChange={(e) => updateTuning("frontOffset", e.target.value)}
-            />
-          </label>
-        </aside>
+          <div className={`mario-scroll-indicator ${progress > 0.06 ? "is-hidden" : ""}`}>
+            Scroll down to move the character
+          </div>
+        </div>
       </div>
       {isContactModalOpen && (
         <div

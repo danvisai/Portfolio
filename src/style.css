@@ -101,8 +101,9 @@ button:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  gap: 2px;
+  width: 50px;
+  height: 58px;
   border-radius: 12px;
   color: rgba(220, 228, 236, 0.85);
   text-decoration: none;
@@ -123,20 +124,12 @@ button:focus {
   background: rgba(255, 255, 255, 0.14);
 }
 
-.dock-item.active::after {
-  content: "";
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #ffffff;
+.dock-item.active .dock-label {
+  opacity: 1;
 }
 
 .dock-icon {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
 }
 
@@ -149,27 +142,19 @@ button:focus {
 }
 
 .dock-label {
-  position: absolute;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
+  position: static;
   white-space: nowrap;
-  font-size: 0.62rem;
+  font-size: 0.55rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  color: #fff;
-  background: rgba(30, 30, 30, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  padding: 3px 8px;
-  opacity: 0;
+  letter-spacing: 0.03em;
+  color: inherit;
+  opacity: 0.72;
   pointer-events: none;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition: opacity 0.18s ease;
 }
 
 .dock-item:hover .dock-label {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
 }
 
 .dock-separator {
@@ -240,15 +225,15 @@ button:focus {
 
   .dock-item {
     width: 40px;
-    height: 40px;
+    height: 50px;
   }
 
   .dock-icon {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   .dock-label {
-    display: none;
+    font-size: 0.48rem;
   }
 
   .dock-theme-toggle {
@@ -313,7 +298,7 @@ button:focus {
 }
 
 .home-header {
-  padding-top: 80px !important;
+  padding-top: 40px !important;
 }
 
 .home-section {
@@ -611,7 +596,7 @@ button:focus {
 
 @media (max-width: 575px) {
   .home-content {
-    padding-top: 7.5rem !important;
+    padding-top: 3.5rem !important;
   }
 
   .hero-stage-shell {
@@ -797,7 +782,7 @@ button:focus {
 /* --------- */
 .project-section {
   position: relative !important;
-  padding-top: 150px !important;
+  padding-top: 80px !important;
   padding-bottom: 40px !important;
   background:
     linear-gradient(180deg, #67aee8 0%, #7ec1f7 40%, #6eaee0 74%, #5a98cf 100%) !important;
@@ -959,7 +944,7 @@ button:focus {
 
 .project-detail-section {
   position: relative !important;
-  padding-top: 140px !important;
+  padding-top: 70px !important;
   padding-bottom: 40px !important;
   background: linear-gradient(180deg, #67aee8 0%, #76baf1 40%, #6aa6da 74%, #568ec2 100%) !important;
   color: #17364f !important;
@@ -1130,6 +1115,105 @@ button:focus {
   line-height: 1.7;
 }
 
+/* ── Project Video Player ────────────────────────────────── */
+
+.pvp-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #07111c;
+}
+
+.pvp-video {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: contain;
+  display: block;
+  cursor: pointer;
+}
+
+.pvp-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
+}
+
+.pvp-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.pvp-btn:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.pvp-btn-forward {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.pvp-progress-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 99px;
+  cursor: pointer;
+  position: relative;
+}
+
+.pvp-progress-bar:hover {
+  height: 7px;
+}
+
+.pvp-progress-fill {
+  height: 100%;
+  background: #e07832;
+  border-radius: 99px;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+.project-detail-gallery {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.project-detail-gallery-item {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(150, 77, 24, 0.34);
+  background: rgba(255, 249, 233, 0.66);
+}
+
+.project-detail-gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .blog-img {
   padding: 0px !important;
   opacity: 0.8 !important;
@@ -1177,7 +1261,7 @@ button:focus {
 
 .about-section {
   position: relative !important;
-  padding-top: 150px !important;
+  padding-top: 80px !important;
   padding-bottom: 48px !important;
   background:
     linear-gradient(180deg, rgba(164, 219, 255, 0.35) 0%, rgba(164, 219, 255, 0) 26%),
@@ -1308,7 +1392,7 @@ button:focus {
 
 .resume-section {
   position: relative !important;
-  padding-top: 110px !important;
+  padding-top: 60px !important;
   padding-bottom: 36px !important;
   background: linear-gradient(180deg, #67aee8 0%, #79bbf2 44%, #6ba8dc 78%, #5a94c9 100%) !important;
   color: #16314a !important;
@@ -1335,6 +1419,47 @@ button:focus {
   z-index: 1;
 }
 
+/* --------- */
+/* Game      */
+/* --------- */
+.game-section {
+  position: relative !important;
+  padding-top: 60px !important;
+  padding-bottom: 80px !important;
+  background: linear-gradient(180deg, #67aee8 0%, #7dc0f6 40%, #6db0e2 74%, #5b9bd0 100%) !important;
+  color: #153047 !important;
+}
+
+.game-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background-image: url("./Assets/terrain_block_tile.png");
+  background-repeat: repeat;
+  background-position: left top;
+  background-size: 56px 56px;
+  image-rendering: pixelated;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.game-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.game-section .purple {
+  color: #d84a1b !important;
+}
+
+.game-section .project-heading {
+  color: #14314a !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
 [data-theme="dark"] body {
   background: #111d2b;
   color: #d8e7f6;
@@ -1355,14 +1480,14 @@ button:focus {
 }
 
 [data-theme="dark"] .dock-label {
-  background: rgba(20, 34, 50, 0.94);
-  border-color: rgba(124, 166, 201, 0.4);
+  color: inherit;
 }
 
 [data-theme="dark"] .about-section,
 [data-theme="dark"] .project-section,
 [data-theme="dark"] .project-detail-section,
-[data-theme="dark"] .resume-section {
+[data-theme="dark"] .resume-section,
+[data-theme="dark"] .game-section {
   background: linear-gradient(180deg, #1d3148 0%, #243c57 46%, #1f344c 100%) !important;
   color: #d2e3f3 !important;
 }

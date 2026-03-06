@@ -17,10 +17,11 @@ function Game() {
             }}
           >
             <h1 className="project-heading">
-              My <strong className="purple">Unity Game</strong>
+              Interactive <strong className="purple">3D Portfolio Space</strong>
             </h1>
-            <p style={{ color: "white" }}>
-              Check out my game built with Unity!
+            <p style={{ maxWidth: "720px", margin: "0 auto", lineHeight: "1.7", fontSize: "1.05rem", opacity: 0.82 }}>
+              This is a fully interactive 3D environment built in Unity — an immersive alternative to browsing a standard webpage.
+              Step inside and explore my work spatially: walk through scenes, interact with exhibits, and experience the portfolio as a living world rather than a list of cards.
             </p>
           </Col>
         </Row>

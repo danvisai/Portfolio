@@ -11,12 +11,12 @@ const UnityGame = () => {
     loadingProgression,
     requestFullscreen,
   } = useUnityContext({
-  loaderUrl: "/Unity-Build/Build/PortfolioCompressedVids.loader.js",
-  dataUrl: "/Unity-Build/Build/PortfolioCompressedVids.data",
-  frameworkUrl: "/Unity-Build/Build/PortfolioCompressedVids.framework.js",
-  codeUrl: "/Unity-Build/Build/PortfolioCompressedVids.wasm",
-  streamingAssetsUrl: "/Unity-Build/StreamingAssets",
-});
+    loaderUrl: `${process.env.PUBLIC_URL}/Build/portfolio.loader.js`,
+    dataUrl: `${process.env.PUBLIC_URL}/Build/portfolio.data`,
+    frameworkUrl: `${process.env.PUBLIC_URL}/Build/portfolio.framework.js`,
+    codeUrl: `${process.env.PUBLIC_URL}/Build/portfolio.wasm`,
+    streamingAssetsUrl: `${process.env.PUBLIC_URL}/StreamingAssets`,
+  });
 
 
   const handleFullscreen = () => {
