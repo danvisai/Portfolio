@@ -927,7 +927,11 @@ function MarioPortfolio() {
           </div>
 
           <div className={`mario-scroll-indicator ${progress > 0.06 ? "is-hidden" : ""}`}>
-            Scroll down to move the character
+            <div className="mario-scroll-mouse">
+              <div className="mario-scroll-wheel" />
+            </div>
+            <div className="mario-scroll-arrow">↓</div>
+            <div className="mario-scroll-label">SCROLL</div>
           </div>
         </div>
       </div>
