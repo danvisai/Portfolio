@@ -40,12 +40,10 @@ const MobileMessage = () => (
   </div>
 );
 
-const UnityGame = () => {
+const UnityCanvas = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
-  if (isMobile) return <MobileMessage />;
-  
   const {
     unityProvider,
     isLoaded,
@@ -243,5 +241,7 @@ const UnityGame = () => {
     </div>
   );
 };
+
+const UnityGame = () => isMobile ? <MobileMessage /> : <UnityCanvas />;
 
 export default UnityGame;
