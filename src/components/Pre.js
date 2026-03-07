@@ -1,7 +1,6 @@
 import React from "react";
 import blockIcon from "../Assets/icon_block.svg";
 import mushroomIcon from "../Assets/icon_mushroom.svg";
-import marioRunning from "../Assets/mario_running.png";
 import terrainTile from "../Assets/terrain_block_tile.png";
 
 function Pre({ load }) {
@@ -23,7 +22,6 @@ function Pre({ load }) {
         </div>
       </div>
       <div className="mario-pre-ground-wrap">
-        <img src={marioRunning} alt="Mario" className="mario-pre-mario" />
         <div
           className="mario-pre-ground"
           style={{ backgroundImage: `url(${terrainTile})` }}

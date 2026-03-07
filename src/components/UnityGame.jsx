@@ -1,9 +1,50 @@
 import React, { useState } from 'react';
 import { Unity, useUnityContext } from 'react-unity-webgl';
 
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+const MobileMessage = () => (
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '340px',
+    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+    borderRadius: '16px',
+    padding: '40px 24px',
+    textAlign: 'center',
+    color: 'white',
+    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+  }}>
+    <div style={{ fontSize: '64px', marginBottom: '16px' }}>🎮</div>
+    <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '12px', color: '#9bbfd9' }}>
+      Game Under Development for Mobile
+    </h2>
+    <p style={{ fontSize: '15px', opacity: 0.85, maxWidth: '320px', lineHeight: '1.7', marginBottom: '20px' }}>
+      The 3D portfolio experience isn't quite ready for mobile yet — it's being optimized for smaller screens. For now, please open it on a <strong>desktop or laptop</strong> for the full experience!
+    </p>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '8px',
+      background: 'rgba(155, 191, 217, 0.15)',
+      border: '1px solid rgba(155, 191, 217, 0.3)',
+      borderRadius: '8px',
+      padding: '10px 20px',
+      fontSize: '14px',
+      opacity: 0.9,
+    }}>
+      🖥️ &nbsp; Best viewed on PC
+    </div>
+  </div>
+);
+
 const UnityGame = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+
+  if (isMobile) return <MobileMessage />;
   
   const {
     unityProvider,
