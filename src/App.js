@@ -5,6 +5,7 @@ import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import ProjectDetail from "./components/Projects/ProjectDetail";
 import Resume from "./components/Resume/ResumeNew";
+import Design from "./components/Design/Design";
 import Game from "./components/Game";
 import MarioPortfolio from "./components/MarioPortfolio";
 import {
@@ -43,6 +44,8 @@ function AppLayout({ load }) {
           <Route path="/" element={<MarioPortfolio />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
+          <Route path="/design" element={<Design />} />
+          <Route path="/design/:slug" element={<Navigate to="/design" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/game" element={<Game />} />

@@ -7,13 +7,14 @@ import {
   AiOutlineFundProjectionScreen,
   AiOutlineUser,
 } from "react-icons/ai";
-import { IoGameControllerOutline } from "react-icons/io5";
+import { IoGameControllerOutline, IoColorPaletteOutline } from "react-icons/io5";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const NAV_ITEMS = [
   { to: "/", icon: AiOutlineHome, label: "Home" },
   { to: "/about", icon: AiOutlineUser, label: "About" },
   { to: "/project", icon: AiOutlineFundProjectionScreen, label: "Projects" },
+  { to: "/design", icon: IoColorPaletteOutline, label: "Design" },
   { to: "/game", icon: IoGameControllerOutline, label: "Game" },
   { to: "/resume", icon: CgFileDocument, label: "Resume" },
 ];
