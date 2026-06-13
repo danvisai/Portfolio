@@ -1835,12 +1835,70 @@ button:focus {
   padding-bottom: 100px !important;
 }
 
+/* Scroll-reveal system */
+.rv {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.rv-group > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.rv-group.is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+.rv-group.is-in > *:nth-child(2) { transition-delay: 0.09s; }
+.rv-group.is-in > *:nth-child(3) { transition-delay: 0.18s; }
+.rv-group.is-in > *:nth-child(4) { transition-delay: 0.27s; }
+.rv-group.is-in > *:nth-child(5) { transition-delay: 0.36s; }
+.rv-group.is-in > *:nth-child(6) { transition-delay: 0.45s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv,
+  .rv-group > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Hero */
 .ds-hero {
   max-width: 880px;
   margin: 0 auto 26px;
   text-align: center;
   padding-top: 10px;
+  animation: ds-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ds-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-hero {
+    animation: none;
+  }
 }
 
 .ds-kicker {
@@ -1973,16 +2031,48 @@ button:focus {
 }
 
 .ds-study-head {
-  max-width: 860px;
+  max-width: 900px;
+  min-height: 56vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 26px;
 }
 
 .ds-study-num {
   display: block;
   font-family: "Press Start 2P", monospace;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  color: rgba(216, 74, 27, 0.9);
-  text-shadow: 4px 4px 0 rgba(255, 223, 132, 0.95);
-  margin-bottom: 12px;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  color: rgba(216, 74, 27, 0.92);
+  text-shadow: 6px 6px 0 rgba(255, 223, 132, 0.95);
+  margin-bottom: 22px;
+}
+
+.ds-scroll-cue {
+  display: inline-block;
+  margin-top: 34px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5d83a4;
+  animation: ds-cue-bob 1.6s ease-in-out infinite;
+}
+
+@keyframes ds-cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-scroll-cue {
+    animation: none;
+  }
 }
 
 .ds-study-kicker {
@@ -1995,18 +2085,19 @@ button:focus {
 }
 
 .ds-study h2 {
-  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-size: clamp(2.1rem, 4.6vw, 3.5rem);
   font-weight: 800;
   color: #14304a;
-  line-height: 1.15;
-  margin-bottom: 14px;
+  line-height: 1.12;
+  margin-bottom: 18px;
 }
 
 .ds-summary {
-  font-size: 1.02rem;
+  font-size: clamp(1.04rem, 1.5vw, 1.22rem);
   color: #2c5273;
-  line-height: 1.7;
-  margin-bottom: 16px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+  max-width: 780px;
 }
 
 .ds-meta {
@@ -2438,6 +2529,15 @@ button:focus {
   .ds-study {
     padding-top: 48px;
   }
+
+  .ds-study-head {
+    min-height: 0;
+    padding-top: 8px;
+  }
+
+  .ds-scroll-cue {
+    display: none;
+  }
 }
 
 /* Dark mode */
@@ -2570,4 +2670,8 @@ button:focus {
 
 [data-theme="dark"] .ds-loop-step strong {
   color: #ffb347;
+}
+
+[data-theme="dark"] .ds-scroll-cue {
+  color: #8fb4d4;
 }

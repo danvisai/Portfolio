@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Particle from "../Particle";
 import { DESIGN_PROCESS, CASE_STUDIES, DESIGN_CODA } from "./designData";
 
-function Figure({ img }) {
+function Figure({ img, className = "" }) {
   return (
-    <figure className="ds-figure">
+    <figure className={`ds-figure ${className}`.trim()}>
       <div className="ds-figure-frame">
-        <img src={img.src} alt={img.alt} />
+        <img src={img.src} alt={img.alt} loading="lazy" />
       </div>
       {img.caption && <figcaption>{img.caption}</figcaption>}
     </figure>
@@ -19,17 +19,17 @@ function StudyBlock({ block }) {
   switch (block.type) {
     case "text":
       return (
-        <div className="ds-block">
+        <div className="ds-block rv">
           <h3>{block.heading}</h3>
           <p>{block.body}</p>
         </div>
       );
     case "figures":
       if (block.images.length === 1) {
-        return <Figure img={block.images[0]} />;
+        return <Figure img={block.images[0]} className="rv" />;
       }
       return (
-        <div className={`ds-figrow cols-${block.images.length}`}>
+        <div className={`ds-figrow cols-${block.images.length} rv-group`}>
           {block.images.map((img) => (
             <Figure key={img.src} img={img} />
           ))}
@@ -37,7 +37,7 @@ function StudyBlock({ block }) {
       );
     case "quotes":
       return (
-        <div className="ds-block">
+        <div className="ds-block rv-group">
           {block.items.map((quote) => (
             <blockquote className="ds-quote" key={quote.text}>
               <p>“{quote.text}”</p>
@@ -49,8 +49,8 @@ function StudyBlock({ block }) {
     case "points":
       return (
         <div className="ds-block ds-block-wide">
-          <h3>{block.heading}</h3>
-          <div className="ds-points">
+          <h3 className="rv">{block.heading}</h3>
+          <div className="ds-points rv-group">
             {block.items.map((point) => (
               <div className="ds-point" key={point.title}>
                 <h4>{point.title}</h4>
@@ -63,8 +63,8 @@ function StudyBlock({ block }) {
     case "recs":
       return (
         <div className="ds-block">
-          <h3>{block.heading}</h3>
-          <ul className="ds-recs">
+          <h3 className="rv">{block.heading}</h3>
+          <ul className="ds-recs rv-group">
             {block.items.map((rec) => (
               <li className="ds-rec" key={rec}>
                 {rec}
@@ -76,8 +76,8 @@ function StudyBlock({ block }) {
     case "loop":
       return (
         <div className="ds-block ds-block-wide">
-          <h3>{block.heading}</h3>
-          <div className="ds-loop">
+          <h3 className="rv">{block.heading}</h3>
+          <div className="ds-loop rv-group">
             {block.steps.map((step) => (
               <div className="ds-loop-step" key={step.label}>
                 <strong>{step.label}</strong>
@@ -89,7 +89,7 @@ function StudyBlock({ block }) {
       );
     case "persona":
       return (
-        <div className="ds-persona">
+        <div className="ds-persona rv">
           <img src={block.image.src} alt={block.image.alt} />
           <div>
             <h4>{block.name}</h4>
@@ -103,6 +103,42 @@ function StudyBlock({ block }) {
 }
 
 function Design() {
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const targets = document.querySelectorAll(".rv, .rv-group");
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      targets.forEach((el) => el.classList.add("is-in"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToStudy = (event, anchor) => {
+    event.preventDefault();
+    const el = document.getElementById(anchor);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", `#${anchor}`);
+    }
+  };
+
   return (
     <Container fluid className="project-section design-section">
       <Particle />
@@ -120,7 +156,11 @@ function Design() {
           </p>
           <nav className="ds-index" aria-label="Case study index">
             {CASE_STUDIES.map((study) => (
-              <a key={study.anchor} href={`#${study.anchor}`}>
+              <a
+                key={study.anchor}
+                href={`#${study.anchor}`}
+                onClick={(event) => scrollToStudy(event, study.anchor)}
+              >
                 <span>{study.id}</span>
                 {study.title}
               </a>
@@ -128,7 +168,7 @@ function Design() {
           </nav>
         </header>
 
-        <div className="ds-process" aria-label="My design process">
+        <div className="ds-process rv-group" aria-label="My design process">
           {DESIGN_PROCESS.map((item, index) => (
             <div className="ds-process-step" key={item.step}>
               <span className="ds-process-num">{index + 1}</span>
@@ -141,8 +181,10 @@ function Design() {
         <div className="ds-studies">
           {CASE_STUDIES.map((study) => (
             <section className="ds-study" id={study.anchor} key={study.anchor}>
-              <div className="ds-study-head">
-                <span className="ds-study-num">{study.id}</span>
+              <div className="ds-study-head rv">
+                <span className="ds-study-num" aria-hidden="true">
+                  {study.id}
+                </span>
                 <p className="ds-study-kicker">{study.kicker}</p>
                 <h2>{study.title}</h2>
                 <p className="ds-summary">{study.summary}</p>
@@ -160,9 +202,12 @@ function Design() {
                     {study.meta.methods}
                   </div>
                 </div>
+                <span className="ds-scroll-cue" aria-hidden="true">
+                  ▼ scroll for the study
+                </span>
               </div>
 
-              <div className="ds-stats">
+              <div className="ds-stats rv-group">
                 {study.stats.map((stat) => (
                   <div className="ds-stat" key={stat.label}>
                     <span className="ds-stat-value">{stat.value}</span>
@@ -171,13 +216,13 @@ function Design() {
                 ))}
               </div>
 
-              <Figure img={study.hero} />
+              <Figure img={study.hero} className="rv" />
 
               {study.blocks.map((block, index) => (
                 <StudyBlock block={block} key={`${study.anchor}-${index}`} />
               ))}
 
-              <div className="ds-takeaway">
+              <div className="ds-takeaway rv">
                 <strong>Takeaway</strong>
                 <p>{study.takeaway}</p>
               </div>
@@ -185,7 +230,7 @@ function Design() {
           ))}
         </div>
 
-        <div className="ds-coda">
+        <div className="ds-coda rv">
           <img src={DESIGN_CODA.image.src} alt={DESIGN_CODA.image.alt} />
           <div>
             <p className="ds-study-kicker">{DESIGN_CODA.kicker}</p>
@@ -194,7 +239,7 @@ function Design() {
           </div>
         </div>
 
-        <div className="ds-cta">
+        <div className="ds-cta rv">
           <h2>Want the full reports?</h2>
           <p>
             Every study above has complete documentation — study plans, raw
