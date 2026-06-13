@@ -1835,43 +1835,103 @@ button:focus {
   padding-bottom: 100px !important;
 }
 
-/* Scroll-reveal system */
+/* 3D scroll-reveal — content drops & pops into a scattered desk in 3D space */
+.design-section {
+  overflow-x: clip;
+}
+
 .rv {
   opacity: 0;
-  transform: translateY(34px);
-  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: perspective(1100px) translate3d(0, 64px, -150px) rotateX(24deg);
+  transform-origin: center bottom;
+  transition: opacity 0.8s ease,
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
   will-change: opacity, transform;
 }
 
 .rv.is-in {
   opacity: 1;
-  transform: none;
+  transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg);
 }
 
 .rv-group > * {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: perspective(1100px) translate3d(0, 60px, -180px) rotateX(28deg)
+    rotate(var(--rz, 0deg));
+  transform-origin: center bottom;
+  transition: opacity 0.7s ease,
+    transform 0.9s cubic-bezier(0.34, 1.32, 0.5, 1), box-shadow 0.4s ease;
   will-change: opacity, transform;
 }
 
 .rv-group.is-in > * {
   opacity: 1;
-  transform: none;
+  transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg)
+    rotate(var(--rz, 0deg));
 }
 
-.rv-group.is-in > *:nth-child(2) { transition-delay: 0.09s; }
+.rv-group.is-in > *:nth-child(1) { transition-delay: 0.02s; }
+.rv-group.is-in > *:nth-child(2) { transition-delay: 0.1s; }
 .rv-group.is-in > *:nth-child(3) { transition-delay: 0.18s; }
-.rv-group.is-in > *:nth-child(4) { transition-delay: 0.27s; }
-.rv-group.is-in > *:nth-child(5) { transition-delay: 0.36s; }
-.rv-group.is-in > *:nth-child(6) { transition-delay: 0.45s; }
+.rv-group.is-in > *:nth-child(4) { transition-delay: 0.26s; }
+.rv-group.is-in > *:nth-child(5) { transition-delay: 0.34s; }
+.rv-group.is-in > *:nth-child(6) { transition-delay: 0.42s; }
+
+/* resting scatter tilt — photos & notes dropped on a desk */
+.ds-figrow > .ds-figure:nth-child(odd) { --rz: -2deg; }
+.ds-figrow > .ds-figure:nth-child(even) { --rz: 2deg; }
+.ds-points > .ds-point:nth-child(4n + 1) { --rz: -1.6deg; }
+.ds-points > .ds-point:nth-child(4n + 2) { --rz: 1.4deg; }
+.ds-points > .ds-point:nth-child(4n + 3) { --rz: 1.2deg; }
+.ds-points > .ds-point:nth-child(4n) { --rz: -1.3deg; }
+.ds-stats > .ds-stat:nth-child(odd) { --rz: -1.4deg; }
+.ds-stats > .ds-stat:nth-child(even) { --rz: 1.4deg; }
+.ds-loop > .ds-loop-step:nth-child(odd) { --rz: -1.1deg; }
+.ds-loop > .ds-loop-step:nth-child(even) { --rz: 1.1deg; }
+
+/* "collage popping open" — paired figures start clustered, spread apart */
+.ds-figrow.cols-2:not(.is-in) > .ds-figure:nth-child(odd) {
+  transform: perspective(1100px) translate3d(38px, 52px, -190px) rotateX(30deg)
+    rotate(-9deg);
+}
+.ds-figrow.cols-2:not(.is-in) > .ds-figure:nth-child(even) {
+  transform: perspective(1100px) translate3d(-38px, 52px, -190px) rotateX(30deg)
+    rotate(9deg);
+}
+
+/* hover lift — pick a card up off the surface */
+.ds-figure-frame {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.ds-figure:hover .ds-figure-frame {
+  transform: perspective(900px) translateZ(40px) translateY(-6px);
+  box-shadow: 0 22px 0 rgba(126, 67, 21, 0.24),
+    0 34px 54px rgba(22, 47, 70, 0.32);
+}
+
+.ds-point:hover,
+.ds-stat:hover,
+.ds-loop-step:hover {
+  box-shadow: 0 16px 0 rgba(126, 67, 21, 0.32),
+    0 26px 42px rgba(22, 47, 70, 0.28);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .rv,
   .rv-group > * {
     opacity: 1 !important;
-    transform: none !important;
+    transform: rotate(var(--rz, 0deg)) !important;
     transition: none !important;
+  }
+
+  .ds-figure-frame {
+    transition: none;
+  }
+
+  .ds-figure:hover .ds-figure-frame {
+    transform: none;
   }
 }
 
