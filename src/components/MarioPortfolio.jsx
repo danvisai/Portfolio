@@ -913,6 +913,12 @@ function MarioPortfolio() {
           </div>
 
           <div className="mario-character-shell">
+            <div className={`mario-scroll-indicator ${progress > 0.06 ? "is-hidden" : ""}`}>
+              <div className="mario-scroll-mouse">
+                <div className="mario-scroll-wheel" />
+              </div>
+              <div className="mario-scroll-label">SCROLL</div>
+            </div>
             <div
               className={`mario-character ${isPreparingJump ? "is-pre-jump" : ""}`}
               style={{
@@ -924,10 +930,6 @@ function MarioPortfolio() {
             >
               <canvas ref={marioCanvasRef} className="mario-sprite-canvas" />
             </div>
-          </div>
-
-          <div className={`mario-scroll-indicator ${progress > 0.06 ? "is-hidden" : ""}`}>
-            Scroll down to move the character
           </div>
         </div>
       </div>

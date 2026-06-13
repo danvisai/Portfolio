@@ -420,25 +420,63 @@
 
 .mario-scroll-indicator {
   position: absolute;
-  left: 24px;
-  top: 22px;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 24;
-  padding: 10px 14px;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(20, 40, 65, 0.42);
+  background: rgba(20, 40, 65, 0.52);
   color: #f2f8ff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  white-space: nowrap;
   pointer-events: none;
   transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
 .mario-scroll-indicator.is-hidden {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateX(-50%) translateY(-6px);
+}
+
+/* Mouse body */
+.mario-scroll-mouse {
+  width: 26px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+/* Animated scroll wheel dot */
+.mario-scroll-wheel {
+  width: 5px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  animation: mario-scroll-dot 1.2s ease-in-out infinite;
+}
+
+@keyframes mario-scroll-dot {
+  0%   { transform: translateY(0);   opacity: 1; }
+  60%  { transform: translateY(8px); opacity: 0.2; }
+  100% { transform: translateY(0);   opacity: 1; }
+}
+
+
+/* Label */
+.mario-scroll-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 .mario-character {
@@ -655,12 +693,6 @@
     left: 80px;
   }
 
-  .mario-scroll-indicator {
-    left: 14px;
-    top: 18px;
-    font-size: 0.72rem;
-    padding: 8px 10px;
-  }
 
   .mario-stop-card {
     height: clamp(200px, 44vh, 340px);
@@ -701,14 +733,6 @@
     left: 40px;
   }
 
-  .mario-scroll-indicator {
-    left: 10px;
-    top: 12px;
-    font-size: 0.62rem;
-    padding: 7px 9px;
-    max-width: min(72vw, 220px);
-    line-height: 1.25;
-  }
 
   .mario-character,
   .mario-sprite-canvas {
