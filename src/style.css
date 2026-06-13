@@ -2030,32 +2030,130 @@ button:focus {
   margin-top: 44px;
 }
 
-.ds-study-head {
-  max-width: 900px;
-  min-height: 56vh;
+/* Cover card — image + heading that fills the screen, scroll past to enter */
+.ds-cover {
+  position: relative;
+  height: 86vh;
+  min-height: 460px;
+  max-height: 840px;
+  border-radius: 16px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: 26px;
+  align-items: flex-end;
+  border: 2px solid rgba(148, 74, 20, 0.62);
+  box-shadow: 0 14px 0 rgba(126, 67, 21, 0.3), 0 22px 40px rgba(22, 47, 70, 0.28);
+  margin-bottom: 40px;
 }
 
-.ds-study-num {
+.ds-cover-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.1);
+  transition: transform 1.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.ds-cover.is-in .ds-cover-img {
+  transform: scale(1);
+}
+
+.ds-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 16, 26, 0.9) 0%,
+    rgba(8, 16, 26, 0.62) 36%,
+    rgba(8, 16, 26, 0.18) 68%,
+    rgba(8, 16, 26, 0.05) 100%
+  );
+}
+
+.ds-cover-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  padding: clamp(22px, 4vw, 46px);
+  color: #fff;
+}
+
+.ds-cover-content > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease,
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ds-cover.is-in .ds-cover-content > * {
+  opacity: 1;
+  transform: none;
+}
+
+.ds-cover.is-in .ds-cover-content > *:nth-child(2) {
+  transition-delay: 0.12s;
+}
+.ds-cover.is-in .ds-cover-content > *:nth-child(3) {
+  transition-delay: 0.24s;
+}
+.ds-cover.is-in .ds-cover-content > *:nth-child(4) {
+  transition-delay: 0.36s;
+}
+.ds-cover.is-in .ds-cover-content > *:nth-child(5) {
+  transition-delay: 0.48s;
+}
+
+.ds-cover-num {
   display: block;
   font-family: "Press Start 2P", monospace;
-  font-size: clamp(2.4rem, 7vw, 4.6rem);
-  color: rgba(216, 74, 27, 0.92);
-  text-shadow: 6px 6px 0 rgba(255, 223, 132, 0.95);
-  margin-bottom: 22px;
+  font-size: clamp(2.6rem, 8vw, 5.4rem);
+  color: #f8c52d;
+  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.45);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.ds-cover-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #ffd98a;
+  margin-bottom: 10px;
+}
+
+.ds-cover-title {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
+}
+
+.ds-cover-caption {
+  font-size: clamp(0.96rem, 1.4vw, 1.16rem);
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.6;
+  max-width: 720px;
+  margin-bottom: 0;
+}
+
+.ds-study-body {
+  max-width: 1080px;
 }
 
 .ds-scroll-cue {
   display: inline-block;
-  margin-top: 34px;
+  margin-top: 28px;
   font-family: "Press Start 2P", monospace;
   font-size: 0.56rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #5d83a4;
+  color: rgba(255, 255, 255, 0.82);
   animation: ds-cue-bob 1.6s ease-in-out infinite;
 }
 
@@ -2070,6 +2168,17 @@ button:focus {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ds-cover-img {
+    transform: scale(1) !important;
+    transition: none !important;
+  }
+
+  .ds-cover-content > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
   .ds-scroll-cue {
     animation: none;
   }
@@ -2084,20 +2193,13 @@ button:focus {
   margin-bottom: 8px;
 }
 
-.ds-study h2 {
-  font-size: clamp(2.1rem, 4.6vw, 3.5rem);
-  font-weight: 800;
-  color: #14304a;
-  line-height: 1.12;
-  margin-bottom: 18px;
-}
-
 .ds-summary {
-  font-size: clamp(1.04rem, 1.5vw, 1.22rem);
-  color: #2c5273;
-  line-height: 1.75;
-  margin-bottom: 18px;
-  max-width: 780px;
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  color: #1f4263;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 22px;
+  max-width: 820px;
 }
 
 .ds-meta {
@@ -2530,13 +2632,9 @@ button:focus {
     padding-top: 48px;
   }
 
-  .ds-study-head {
-    min-height: 0;
-    padding-top: 8px;
-  }
-
-  .ds-scroll-cue {
-    display: none;
+  .ds-cover {
+    height: 78vh;
+    min-height: 420px;
   }
 }
 
@@ -2670,8 +2768,4 @@ button:focus {
 
 [data-theme="dark"] .ds-loop-step strong {
   color: #ffb347;
-}
-
-[data-theme="dark"] .ds-scroll-cue {
-  color: #8fb4d4;
 }

@@ -107,7 +107,7 @@ function Design() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    const targets = document.querySelectorAll(".rv, .rv-group");
+    const targets = document.querySelectorAll(".rv, .rv-group, .ds-cover");
 
     if (reduceMotion || !("IntersectionObserver" in window)) {
       targets.forEach((el) => el.classList.add("is-in"));
@@ -181,14 +181,32 @@ function Design() {
         <div className="ds-studies">
           {CASE_STUDIES.map((study) => (
             <section className="ds-study" id={study.anchor} key={study.anchor}>
-              <div className="ds-study-head rv">
-                <span className="ds-study-num" aria-hidden="true">
-                  {study.id}
-                </span>
-                <p className="ds-study-kicker">{study.kicker}</p>
-                <h2>{study.title}</h2>
-                <p className="ds-summary">{study.summary}</p>
-                <div className="ds-meta">
+              <div className="ds-cover">
+                <div
+                  className="ds-cover-img"
+                  style={{ backgroundImage: `url(${study.hero.src})` }}
+                  role="img"
+                  aria-label={study.hero.alt}
+                />
+                <div className="ds-cover-content">
+                  <span className="ds-cover-num" aria-hidden="true">
+                    {study.id}
+                  </span>
+                  <p className="ds-cover-kicker">{study.kicker}</p>
+                  <h2 className="ds-cover-title">{study.title}</h2>
+                  {study.hero.caption && (
+                    <p className="ds-cover-caption">{study.hero.caption}</p>
+                  )}
+                  <span className="ds-scroll-cue" aria-hidden="true">
+                    ▼ scroll into the study
+                  </span>
+                </div>
+              </div>
+
+              <div className="ds-study-body">
+                <p className="ds-summary rv">{study.summary}</p>
+
+                <div className="ds-meta rv">
                   <div className="ds-meta-item">
                     <strong>Role</strong>
                     {study.meta.role}
@@ -202,29 +220,24 @@ function Design() {
                     {study.meta.methods}
                   </div>
                 </div>
-                <span className="ds-scroll-cue" aria-hidden="true">
-                  ▼ scroll for the study
-                </span>
-              </div>
 
-              <div className="ds-stats rv-group">
-                {study.stats.map((stat) => (
-                  <div className="ds-stat" key={stat.label}>
-                    <span className="ds-stat-value">{stat.value}</span>
-                    <span className="ds-stat-label">{stat.label}</span>
-                  </div>
+                <div className="ds-stats rv-group">
+                  {study.stats.map((stat) => (
+                    <div className="ds-stat" key={stat.label}>
+                      <span className="ds-stat-value">{stat.value}</span>
+                      <span className="ds-stat-label">{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {study.blocks.map((block, index) => (
+                  <StudyBlock block={block} key={`${study.anchor}-${index}`} />
                 ))}
-              </div>
 
-              <Figure img={study.hero} className="rv" />
-
-              {study.blocks.map((block, index) => (
-                <StudyBlock block={block} key={`${study.anchor}-${index}`} />
-              ))}
-
-              <div className="ds-takeaway rv">
-                <strong>Takeaway</strong>
-                <p>{study.takeaway}</p>
+                <div className="ds-takeaway rv">
+                  <strong>Takeaway</strong>
+                  <p>{study.takeaway}</p>
+                </div>
               </div>
             </section>
           ))}
