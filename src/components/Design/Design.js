@@ -115,8 +115,8 @@ function Design() {
           <p className="ds-lede">
             Games user researcher and developer. I watch people play, listen to
             what they say, check it against what they actually do — then build
-            the fix. Five case studies, from accessible VR to live-service
-            engagement.
+            the fix. Six case studies, from accessible VR to live-service
+            engagement to graphics pipelines.
           </p>
           <nav className="ds-index" aria-label="Case study index">
             {CASE_STUDIES.map((study) => (

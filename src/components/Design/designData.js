@@ -18,6 +18,9 @@ import detroitCrowd from "../../Assets/design/detroit-crowd.jpg";
 import detroitFlowchart from "../../Assets/design/detroit-flowchart.jpg";
 import detroitScene from "../../Assets/design/detroit-scene.jpg";
 import disneyCollage from "../../Assets/design/disney-collage.jpg";
+import gdcHero from "../../Assets/design/gdc-hero.jpg";
+import gdcMemory from "../../Assets/design/gdc-memory.png";
+import gdcCompare from "../../Assets/design/gdc-compare.jpg";
 
 export const DESIGN_PROCESS = [
   {
@@ -485,6 +488,78 @@ export const CASE_STUDIES = [
     ],
     takeaway:
       "Branching narrative is an interaction-design problem as much as a writing problem. Detroit nails the systems that create meaning — choice, consequence, morality — and underbuilds the ones that respect a player's time and memory.",
+  },
+  {
+    id: "06",
+    anchor: "spiderman-port",
+    kicker: "GDC Talk Breakdown · Graphics & Performance",
+    title: "Porting Spider-Man Remastered to PC",
+    summary:
+      "A breakdown of Nixxes' GDC Advanced Graphics Summit talk on bringing Insomniac's PS5 flagship to PC — read through a player-experience lens, because every pipeline decision lands somewhere a player can feel it: a shader hiccup, a cropped cutscene, a reflection that finally holds up.",
+    meta: {
+      role: "Analyst / Presenter",
+      scope: "GDC Advanced Graphics Summit session · PS5 → PC port",
+      methods: "Talk Analysis · Technical Deconstruction · Discussion Facilitation",
+    },
+    stats: [
+      { value: "3", label: "Strategies weighed against shader-compilation stutter" },
+      { value: "2", label: "Memory models reconciled: unified PS5 vs. split PC" },
+      { value: "42:9", label: "Aspect ratio where graceful degradation finally adds bars" },
+    ],
+    hero: {
+      src: gdcHero,
+      alt: "Spider-Man gameplay with the gadget wheel HUD over the city",
+      caption:
+        "Insomniac's PS5 flagship running on PC — the port work is invisible exactly when it succeeds.",
+    },
+    blocks: [
+      {
+        type: "points",
+        heading: "What Nixxes had to solve",
+        items: [
+          {
+            title: "Shader stutter is a first-impression problem",
+            body: "Direct3D 12 builds pipeline state objects at runtime, so something has to give: let the game stutter, pre-compile everything at boot behind a long wait, or stream PSOs during loading screens. Nixxes treated it as part of material streaming — the option players never notice.",
+          },
+          {
+            title: "Two memory models, one game",
+            body: "PS5 uses unified memory; PC splits video and system memory. Go over the VRAM budget and Windows' video memory manager demotes heaps to system RAM — the port has to budget around a mechanism it doesn't control.",
+          },
+          {
+            title: "Ray tracing got a PC-sized upgrade",
+            body: "The acceleration structure splits into BLAS per object and TLAS for the scene. PS5 renders reflections at half resolution; on PC, Nixxes pushed full resolution, better LOD models, and extra geometry the console version never included.",
+          },
+          {
+            title: "Ultrawide is a design problem, not a render problem",
+            body: "Cinematics are authored for 16:9 — naively widening them clips scenes apart. Up to 32:9 the edges blur into peripheral vision; past 42:9 black bars appear. Graceful degradation, tuned ratio by ratio.",
+          },
+        ],
+      },
+      {
+        type: "figures",
+        images: [
+          {
+            src: gdcCompare,
+            alt: "Side-by-side comparison frames of Spider-Man swinging through the city",
+            caption:
+              "Side-by-side frames from the talk — same swing, different pipeline budgets.",
+          },
+          {
+            src: gdcMemory,
+            alt: "D3D12 memory management thread diagram from the talk",
+            caption:
+              "The D3D12 memory-management flow: render, memory-move, and release threads negotiating one budget.",
+          },
+        ],
+      },
+      {
+        type: "text",
+        heading: "The discussion I led",
+        body: "I closed the session with two prompts: which PC-only features have you personally felt that the console version couldn't offer — and why don't console exclusives ship with PC-level flexibility when the hardware is clearly capable? The conversation kept landing on the same point: platform constraints are design constraints, and players experience them directly.",
+      },
+    ],
+    takeaway:
+      "Players don't see pipelines — they feel them. A PSO hiccup is a bad first impression; an ultrawide crop is a broken cutscene. The best port work is invisible: constraint after constraint resolved so the player never knows there was one.",
   },
 ];
 
