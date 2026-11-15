@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  # CRA treats warnings as errors when CI=true; Bootstrap's CSS emits a harmless autoprefixer warning.
+  CI = "false"
