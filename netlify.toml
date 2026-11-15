@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  # Create React App treats build warnings as errors when CI=true (Netlify's default).
+  # Bootstrap 5.1.x emits a harmless autoprefixer deprecation warning (color-adjust),
+  # so keep warnings non-fatal.
+  CI = "false"
